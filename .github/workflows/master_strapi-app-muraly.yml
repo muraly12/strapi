@@ -22,15 +22,15 @@ jobs:
     - name: Log in to registry
       uses: docker/login-action@v1
       with:
-        registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_559599bb195840bd93758a81aeb1598c }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_7bb37a4ef4f64ef9a2b8ace8b5cb8c55 }}
+        registry: https://strapi-app-muraly.azurewebsites.net/
+        username: ${{ secrets.AzureAppService_ContainerUsername_8d385fd45dd344ba8759565c5ae4776e }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_7e9f4cc40188420c9c843b165114c66b }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_559599bb195840bd93758a81aeb1598c }}/stripe123:${{ github.sha }}
+        tags: strapi-app-muraly.azurewebsites.net/${{ secrets.AzureAppService_ContainerUsername_8d385fd45dd344ba8759565c5ae4776e }}/ngnix:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'strapi-app-muraly'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_86ec2822880b45a1a7049dde6ae6c7be }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_559599bb195840bd93758a81aeb1598c }}/stripe123:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_48c644ad7334492abafdafa46b47b54a }}
+        images: 'strapi-app-muraly.azurewebsites.net/${{ secrets.AzureAppService_ContainerUsername_8d385fd45dd344ba8759565c5ae4776e }}/ngnix:${{ github.sha }}'
